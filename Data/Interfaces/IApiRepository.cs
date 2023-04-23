@@ -18,6 +18,6 @@ namespace WebApi.Data.Interfaces
 
         Task<IEnumerable<Vehicles>> GetVehiclesAsync();
 
-        Task<Vehicles> GetUVehiclesByIdAsync(int id);
+        Task<Vehicles> GetVehiclesByIdAsync(int id);
     }
 }

@@ -46,6 +46,26 @@ namespace WebApi.Controllers
             }
             return BadRequest();
         }
+
+        [HttpPut]
+        public async Task<ActionResult> Put(Vehicles vehicles)
+        {
+            var vehicles_data = await _repo.GetVehiclesByIdAsync(vehicles.Id);
+
+            if (vehicles_data == null) { return BadRequest(); }
+
+            vehicles_data.Description = vehicles.Description;
+            vehicles_data.Active = vehicles.Active;
+            vehicles_data.Capacity= vehicles.Capacity;
+            vehicles_data.Year = vehicles.Year;
+
+            if (!await _repo.SaveAll())
+            {
+                return NoContent();
+            }
+
+            return Ok(vehicles_data);
+        }
     }
 
 }

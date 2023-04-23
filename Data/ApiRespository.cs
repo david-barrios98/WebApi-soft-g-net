@@ -36,7 +36,7 @@ namespace WebApi.Data
             return driver;
         }
 
-        public async Task<Vehicles> GetUVehiclesByIdAsync(int id)
+        public async Task<Vehicles> GetVehiclesByIdAsync(int id)
         {
             var vehicle = await _context.Vehicles.FirstOrDefaultAsync(u => u.Id == id);
             return vehicle;

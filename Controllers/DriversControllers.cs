@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
 using WebApi.Data;
 using WebApi.Data.Interfaces;
 using WebApi.Models;
 
 namespace WebApi.Controllers
 {
-
+    
     [ApiController]
     [Route("api/[controller]")]
     public class DriversControllers : ControllerBase
@@ -16,6 +17,7 @@ namespace WebApi.Controllers
             _repo = repo;
         }
 
+        [EnableCors("MyPolicy")]
         [HttpGet]
         public async Task<IActionResult> Get()
         {
@@ -23,7 +25,7 @@ namespace WebApi.Controllers
 
             return Ok(drivers);
         }
-
+        [EnableCors("MyPolicy")]
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
@@ -32,11 +34,14 @@ namespace WebApi.Controllers
             if (drivers == null)
             {
                 return NotFound("Drivers no encontrado");
+
             }
+
+            
 
             return Ok(drivers);
         }
-
+        [EnableCors("MyPolicy")]
         [HttpPost]
         public async Task<ActionResult> Post(Drivers drivers)
         {
@@ -47,7 +52,7 @@ namespace WebApi.Controllers
             }
             return BadRequest();
         }
-
+        [EnableCors("MyPolicy")]
         [HttpPut]
         public async Task<ActionResult> Put(Drivers drivers)
         {
@@ -70,7 +75,7 @@ namespace WebApi.Controllers
 
             return Ok(Drivers_data);
         }
-
+        [EnableCors("MyPolicy")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
@@ -85,7 +90,7 @@ namespace WebApi.Controllers
                 return NoContent();
             }
 
-            return Ok("Drivers eliminado");
+            return Ok(Drivers_data);
         }
     }
 }
